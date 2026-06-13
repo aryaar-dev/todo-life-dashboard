@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard — To-Do &amp; Focus</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========================================================
+       HEADER — Real-time Clock, Greeting, Theme Toggle
+  ========================================================= -->
+  <header class="header-bar">
+    <div class="greeting-section">
+      <div id="clock" class="clock">00:00:00</div>
+      <div id="date-display" class="date-display"></div>
+      <div class="greeting-row">
+        <span id="greeting-text" class="greeting-text">Hello!</span>
+        <span id="username-display" class="username-badge" title="Click to change name"></span>
+        <button id="btn-edit-name" class="btn-icon" title="Edit your name">✏️</button>
+      </div>
+    </div>
+
+    <!-- Light / Dark Mode Toggle -->
+    <button id="btn-theme" class="btn-theme" title="Toggle Light / Dark Mode">
+      <span id="theme-icon">🌙</span>
+    </button>
+  </header>
+
+  <!-- ========================================================
+       MODAL — Custom Name Setup
+  ========================================================= -->
+  <div id="name-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3>What's your name?</h3>
+      <input
+        type="text"
+        id="input-username"
+        class="modal-input"
+        placeholder="e.g. Budi"
+        maxlength="30"
+        autocomplete="off"
+      />
+      <div class="modal-actions">
+        <button id="btn-save-name" class="btn-primary">Save</button>
+        <button id="btn-cancel-name" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MAIN DASHBOARD — 3-card grid layout
+  ========================================================= -->
+  <main class="dashboard-grid">
+
+    <!-- ─────────────────────────────────────────
+         CARD 1 : Pomodoro Focus Timer
+    ──────────────────────────────────────────── -->
+    <section class="card card-timer">
+      <h2 class="card-title">🍅 Focus Timer</h2>
+      <div id="timer-display" class="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button id="btn-start" class="btn-primary">▶ Start</button>
+        <button id="btn-stop"  class="btn-secondary">⏸ Stop</button>
+        <button id="btn-reset" class="btn-secondary">↺ Reset</button>
+      </div>
+      <p id="timer-status" class="timer-status">Ready to focus!</p>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         CARD 2 : To-Do List
+    ──────────────────────────────────────────── -->
+    <section class="card card-todo">
+      <h2 class="card-title">✅ My To-Do List</h2>
+
+      <!-- Input row -->
+      <div class="todo-input-row">
+        <input
+          type="text"
+          id="input-task"
+          class="text-input"
+          placeholder="Add a new task…"
+          maxlength="120"
+          autocomplete="off"
+        />
+        <button id="btn-add-task" class="btn-primary">Add</button>
+      </div>
+
+      <!-- Duplicate warning -->
+      <p id="todo-warning" class="warning-text hidden">⚠️ Task already exists in your list!</p>
+
+      <!-- Rendered task items -->
+      <ul id="task-list" class="task-list"></ul>
+
+      <!-- Empty state -->
+      <p id="todo-empty" class="empty-state">No tasks yet — add one above! 🎉</p>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         CARD 3 : Quick Links
+    ──────────────────────────────────────────── -->
+    <section class="card card-links">
+      <h2 class="card-title">🔗 Quick Links</h2>
+
+      <!-- Input group -->
+      <div class="links-input-group">
+        <input
+          type="text"
+          id="input-link-name"
+          class="text-input"
+          placeholder="Link name (e.g. YouTube)"
+          maxlength="40"
+          autocomplete="off"
+        />
+        <input
+          type="url"
+          id="input-link-url"
+          class="text-input"
+          placeholder="https://example.com"
+          autocomplete="off"
+        />
+        <button id="btn-add-link" class="btn-primary">Add Link</button>
+      </div>
+
+      <!-- Validation warning -->
+      <p id="links-warning" class="warning-text hidden">⚠️ Please fill in both name and a valid URL.</p>
+
+      <!-- Link buttons grid -->
+      <div id="links-grid" class="links-grid"></div>
+
+      <!-- Empty state -->
+      <p id="links-empty" class="empty-state">No quick links yet — add one above! 🚀</p>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       MODAL — Edit Existing Task
+  ========================================================= -->
+  <div id="edit-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3>Edit Task</h3>
+      <input
+        type="text"
+        id="input-edit-task"
+        class="modal-input"
+        maxlength="120"
+        autocomplete="off"
+      />
+      <p id="edit-warning" class="warning-text hidden">⚠️ A task with this name already exists!</p>
+      <div class="modal-actions">
+        <button id="btn-save-edit" class="btn-primary">Save Changes</button>
+        <button id="btn-cancel-edit" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       FOOTER
+  ========================================================= -->
+  <footer class="footer">
+    <p>Life Dashboard &copy; <span id="footer-year"></span> — Built with ❤️ &amp; Vanilla JS</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
